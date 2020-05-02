@@ -1,0 +1,7 @@
+/*
+!/Assets/
+/Assets/*
+!/Assets/*.cs
+!.gitignore
+!/docs/
+!/ProjectSettings/
