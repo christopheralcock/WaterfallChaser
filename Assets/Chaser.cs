@@ -5,13 +5,7 @@ using UnityEngine;
 public class Chaser : MonoBehaviour
 {
 
-    public int speedMultiplier = 200;
-
-    private void Update()
-    {
-    }
-
-
+    public int speedMultiplier = 300;
 
     public void Jump(Vector2 mousePosition)
     {

@@ -5,24 +5,36 @@ using UnityEngine;
 public class Flinger : MonoBehaviour
 {
     private Chaser chaser;
+    private ChaserPointer chaserPointer;
 
     // Start is called before the first frame update
     void Awake()
     {
         chaser = FindObjectOfType<Chaser>();
-        Debug.Log("found chaser");
-        Debug.Log(chaser);
+        chaserPointer = FindObjectOfType<ChaserPointer>();
     }
 
     private void OnMouseDown()
     {
-        Debug.Log("that mouse is down");
+        chaserPointer.Warp(GetMousePosition());
+    }
+
+    private void OnMouseDrag()
+    {
+        chaserPointer.Warp(GetMousePosition());
     }
 
     private void OnMouseUp()
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        chaser.Jump(mousePosition);
+        chaser.Jump(GetMousePosition());
+        chaserPointer.Reset();
         Debug.Log("flinger onmouseup");
+    }
+
+    private Vector3 GetMousePosition()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        return mousePosition;
     }
 }
