@@ -8,9 +8,10 @@ public class LaunchArcRenderer : MonoBehaviour
 {
 
     LineRenderer lr;
+    public GameObject source;
 
-    public float velocity =  10;
-    public float angle = 45;
+    public float velocity =  1000;
+    public float angle = 315;
     public int resolution = 10;
 
     float g; // force of gravity on the y axis
@@ -21,11 +22,14 @@ public class LaunchArcRenderer : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics2D.gravity.y);
+        this.transform.position = source.transform.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void RenderArcPublic(float inputVelocity, float inputAngle, Vector3 inputOrigin)
     {
+        this.velocity = inputVelocity;
+        this.angle = inputAngle;
+        this.transform.position = inputOrigin;
         RenderArc();
     }
 
@@ -34,7 +38,6 @@ public class LaunchArcRenderer : MonoBehaviour
     {
         lr.positionCount = resolution + 1;
         lr.SetPositions(CalculateArcArray());
-
     }
 
     Vector3[] CalculateArcArray()
@@ -56,9 +59,12 @@ public class LaunchArcRenderer : MonoBehaviour
         float x = t * maxDistance;
         // the 0 below is because the tutorial i'm working from assumes lands on same level as launched from, which might not be what i want. should be y with an sub 0
         float y = 0 + (x * Mathf.Tan(radianAngle) - ((g * x * x) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle))));
-        //float y = x + 1;
-        return new Vector3(x, y);  
+        x = x + this.transform.position.x;
+        y = y + this.transform.position.y;
+        return new Vector3(x, y);
+
     }
+
 
 
 }

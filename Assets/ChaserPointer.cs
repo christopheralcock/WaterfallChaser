@@ -5,20 +5,14 @@ using UnityEngine;
 public class ChaserPointer : MonoBehaviour
 {
 
-    Chaser chaser;
+    public Chaser chaser;
+    public LaunchArcRenderer lar;
     Vector3 currentPosition;
     public float size = 2;
-
-    public void Awake()
-    {
-        chaser = FindObjectOfType<Chaser>();
-    }
 
     public void Warp(Vector3 mousePosition)
     {
         currentPosition = this.transform.position;
-        Debug.Log("jump");
-
         //set size of pointer
         var direction = currentPosition - mousePosition;
         float warpFactor = Mathf.Sqrt((direction.x * direction.x) + (direction.y * direction.y));
@@ -27,9 +21,11 @@ public class ChaserPointer : MonoBehaviour
 
         // and set direction
         var rot = this.transform.rotation.eulerAngles;
-        float angle = (Mathf.Atan2(currentPosition.y - mousePosition.y, currentPosition.x - mousePosition.x) * 180 / Mathf.PI) - 90; 
+        float angle = (Mathf.Atan2(currentPosition.y - mousePosition.y, currentPosition.x - mousePosition.x) * 180 / Mathf.PI) - 90;
         rot.z = angle;
         this.transform.rotation = Quaternion.Euler(rot);
+        lar.RenderArcPublic(1000, angle + 90, this.currentPosition);
+
     }
 
     public void Reset()
