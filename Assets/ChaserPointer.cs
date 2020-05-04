@@ -8,7 +8,7 @@ public class ChaserPointer : MonoBehaviour
     public Chaser chaser;
     public LaunchArcRenderer lar;
     Vector3 currentPosition;
-    public float size = 2;
+    public float size = 100;
 
     public void Warp(Vector3 mousePosition)
     {
@@ -21,10 +21,10 @@ public class ChaserPointer : MonoBehaviour
 
         // and set direction
         var rot = this.transform.rotation.eulerAngles;
-        float angle = (Mathf.Atan2(currentPosition.y - mousePosition.y, currentPosition.x - mousePosition.x) * 180 / Mathf.PI) - 90;
-        rot.z = angle;
+        float angle = (Mathf.Atan2(currentPosition.y - mousePosition.y, currentPosition.x - mousePosition.x) * 180 / Mathf.PI);
+        rot.z = angle - 90;
         this.transform.rotation = Quaternion.Euler(rot);
-        lar.RenderArcPublic(1000, angle + 90, this.currentPosition);
+        lar.RenderArcPublic(4*warpFactor, angle, this.currentPosition);
 
     }
 
