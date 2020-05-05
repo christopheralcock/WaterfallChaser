@@ -12,7 +12,8 @@ public class LaunchArcRenderer : MonoBehaviour
 
     public float velocity =  1000;
     public float angle = 315;
-    public int resolution = 10;
+    public float pastYFactor = 1.5f; // the amount of x you go past your initial Y - ie line goes on further 
+    public int resolution = 20;
 
     float g; // force of gravity on the y axis
     float radianAngle;
@@ -23,6 +24,7 @@ public class LaunchArcRenderer : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics2D.gravity.y);
         this.transform.position = source.transform.position;
+        lr.positionCount = 0;
     }
 
     public void RenderArcPublic(float inputVelocity, float inputAngle, Vector3 inputOrigin)
@@ -44,7 +46,7 @@ public class LaunchArcRenderer : MonoBehaviour
     {
         var arcArray = new Vector3[resolution+1];
         this.radianAngle = Mathf.Deg2Rad * angle;
-        float maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
+        float maxDistance = ((velocity * velocity * Mathf.Sin(2 * radianAngle)) / g) * pastYFactor;
         for (int i = 0; i <= resolution; i++)
         {
             float t = (float)i / (float)resolution;
