@@ -14,6 +14,10 @@ public class LaunchArcRenderer : MonoBehaviour
     public float angle = 315;
     public float pastYFactor = 1.5f; // the amount of x you go past your initial Y - ie line goes on further 
     public int resolution = 20;
+    public Color green = new Color(68, 224, 39, 255);
+    public Color red = new Color(255, 1, 1, 255);
+    public Color colour;
+
 
     float g; // force of gravity on the y axis
     float radianAngle;
@@ -25,6 +29,7 @@ public class LaunchArcRenderer : MonoBehaviour
         g = Mathf.Abs(Physics2D.gravity.y);
         this.transform.position = source.transform.position;
         lr.positionCount = 0;
+        this.colour = this.red;
     }
 
     public void RenderArcPublic(float inputVelocity, float inputAngle, Vector3 inputOrigin)
@@ -38,6 +43,7 @@ public class LaunchArcRenderer : MonoBehaviour
     // populating line renderer settings
     void RenderArc()
     {
+        lr.material.color = this.colour;
         lr.positionCount = resolution + 1;
         lr.SetPositions(CalculateArcArray());
     }

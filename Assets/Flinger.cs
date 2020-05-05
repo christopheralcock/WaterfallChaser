@@ -6,6 +6,7 @@ public class Flinger : MonoBehaviour
 {
     private Chaser chaser;
     private ChaserPointer chaserPointer;
+    public LaunchArcRenderer lar;
 
     // Start is called before the first frame update
     void Awake()
@@ -16,11 +17,32 @@ public class Flinger : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (chaser.IsStationary())
+        {
+            Debug.Log("chaser stationary, colour green");
+            lar.colour = lar.green;
+        }
+        else
+        {
+            Debug.Log("chaser moving, colour red");
+            lar.colour = lar.red;
+        }
         chaserPointer.Warp(GetMousePosition());
+
     }
 
     private void OnMouseDrag()
     {
+        if (chaser.IsStationary())
+        {
+            Debug.Log("chaser stationary, colour green");
+            lar.colour = lar.green;
+        }
+        else
+        {
+            Debug.Log("chaser moving, colour red");
+            lar.colour = lar.red;
+        }
         chaserPointer.Warp(GetMousePosition());
     }
 

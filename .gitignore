@@ -4,4 +4,5 @@
 !/Assets/*.cs
 !.gitignore
 !/docs/
+!/staging/
 !/ProjectSettings/
