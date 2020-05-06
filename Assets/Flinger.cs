@@ -6,18 +6,23 @@ public class Flinger : MonoBehaviour
 {
     private Chaser chaser;
     private ChaserPointer chaserPointer;
-    public LaunchArcRenderer lar;
+    public LaunchArcRenderer lar; 
+    private AudioSource audioSource;
+
 
     // Start is called before the first frame update
     void Awake()
     {
         chaser = FindObjectOfType<Chaser>();
         chaserPointer = FindObjectOfType<ChaserPointer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnMouseDown()
     {
         this.UpdatePointerAndArc();
+        audioSource.pitch = 1;
+        audioSource.Play();
     }
 
     private void OnMouseDrag()
@@ -29,6 +34,8 @@ public class Flinger : MonoBehaviour
     {
         chaser.Jump(GetMousePosition(), CalculateDirection());
         chaserPointer.Reset();
+        audioSource.pitch = 1.126f;
+        audioSource.Play();
         lar.SetLineReady(false);
     }
 

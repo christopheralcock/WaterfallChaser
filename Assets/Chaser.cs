@@ -9,10 +9,12 @@ public class Chaser : MonoBehaviour
     public bool flingable = false;
     public bool stationary = false;
     private Rigidbody2D chaserRigidbody;
+    private AudioSource audioSource;
 
     public void Awake()
     {
         this.chaserRigidbody = GetComponent<Rigidbody2D>();
+        this.audioSource = GetComponent<AudioSource>();
     }
 
     public void Jump(Vector2 mousePosition, Vector3 direction)
@@ -32,6 +34,7 @@ public class Chaser : MonoBehaviour
     private void OnCollisionEnter2D()
     {
         this.MakeFlingable();
+        audioSource.Play();
     }
 
     private void OnCollisionStay2D()

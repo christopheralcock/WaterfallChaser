@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AudioControl : MonoBehaviour
 {
-    public float volume = 0.13f;
+    //public float volume = 0.13f;
+    public float volume = 1;
+
 
     void Awake()
     {
