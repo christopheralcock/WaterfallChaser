@@ -27,8 +27,9 @@ public class Flinger : MonoBehaviour
 
     private void OnMouseUp()
     {
-        chaser.Jump(GetMousePosition());
+        chaser.Jump(GetMousePosition(), CalculateDirection());
         chaserPointer.Reset();
+        lar.SetLineReady(false);
     }
 
     private Vector3 GetMousePosition()

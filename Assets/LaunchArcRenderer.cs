@@ -8,16 +8,14 @@ public class LaunchArcRenderer : MonoBehaviour
 {
 
     LineRenderer lr;
-    public GameObject source;
 
     public float velocity =  1000;
     public float angle = 315;
     public float pastYFactor = 1.5f; // the amount of x you go past your initial Y - ie line goes on further 
     public int resolution = 20;
     public Color colour;
+    private Color paleGreen = new Color(0, 255, 0, 0.5f);
     float magicNumberThatWorks = 4; // no idea yet why 4 is the factor that sizes the line up to match the path
-
-
     float g; // force of gravity on the y axis
     float radianAngle;
 
@@ -26,7 +24,6 @@ public class LaunchArcRenderer : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics2D.gravity.y);
-        this.transform.position = source.transform.position;
         lr.positionCount = 0;
         this.SetLineReady(false);
     }
@@ -69,7 +66,6 @@ public class LaunchArcRenderer : MonoBehaviour
         x = x + this.transform.position.x;
         y = y + this.transform.position.y;
         return new Vector3(x, y, 10);
-
     }
 
     public void SetLineReady(bool ready)
@@ -80,7 +76,7 @@ public class LaunchArcRenderer : MonoBehaviour
         }
         else
         {
-            this.colour = Color.white;
+            this.colour = this.paleGreen;
         }
     }
 }
