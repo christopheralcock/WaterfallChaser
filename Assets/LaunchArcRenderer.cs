@@ -12,7 +12,8 @@ public class LaunchArcRenderer : MonoBehaviour
     public float velocity =  1000;
     public float angle = 315;
     public float pastYFactor = 1.5f; // the amount of x you go past your initial Y - ie line goes on further 
-    public int resolution = 20;
+    public int defaultResolution = 20;
+    public int resolution;
     public Color colour;
     private Color paleGreen = new Color(0, 255, 0, 0.5f);
     float magicNumberThatWorks = 4; // no idea yet why 4 is the factor that sizes the line up to match the path
@@ -23,9 +24,10 @@ public class LaunchArcRenderer : MonoBehaviour
     private void Awake()
     {
         lr = GetComponent<LineRenderer>();
-        g = Mathf.Abs(Physics2D.gravity.y);
         lr.positionCount = 0;
+        g = Math.Abs(Physics2D.gravity.y);
         this.SetLineReady(false);
+        this.resolution = this.defaultResolution;
     }
 
     public void RenderArcPublic(float inputVelocity, float inputAngle, Vector3 inputOrigin)
@@ -33,15 +35,30 @@ public class LaunchArcRenderer : MonoBehaviour
         this.velocity = inputVelocity * this.magicNumberThatWorks;
         this.angle = inputAngle;
         this.transform.position = inputOrigin;
-        RenderArc();
+        this.MakeInvisibleIfDownwards();
+        this.RenderArc();
+    }
+
+    // if angle is negative, i don't want an arc as it's just misleading in all cases at the moment
+    private void MakeInvisibleIfDownwards()
+    {
+        if (this.angle < 0)
+        {
+            this.colour = Color.clear;
+            this.resolution = 1;
+        }
+        else
+        {
+            this.resolution = this.defaultResolution;
+        }
     }
 
     // populating line renderer settings
     void RenderArc()
     {
-        lr.material.color = this.colour;
-        lr.positionCount = resolution + 1;
-        lr.SetPositions(CalculateArcArray());
+            lr.material.color = this.colour;
+            lr.positionCount = resolution + 1;
+            lr.SetPositions(CalculateArcArray());
     }
 
     Vector3[] CalculateArcArray()

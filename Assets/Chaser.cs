@@ -34,6 +34,15 @@ public class Chaser : MonoBehaviour
         this.MakeFlingable();
     }
 
+    private void OnCollisionStay2D()
+    {
+        this.MakeFlingable();
+    }
+
+    private void OnCollisionExit2D()
+    {
+        this.flingable = false;    
+        }
 
     public bool IsStationary()
     {
