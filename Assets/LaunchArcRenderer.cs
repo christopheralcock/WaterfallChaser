@@ -15,7 +15,7 @@ public class LaunchArcRenderer : MonoBehaviour
     public float pastYFactor = 1.5f; // the amount of x you go past your initial Y - ie line goes on further 
     public int resolution = 20;
     public Color green = new Color(68, 224, 39, 255);
-    public Color red = new Color(255, 1, 1, 255);
+    public Color red = new Color(255, 255, 255, 255);
     public Color colour;
 
 
