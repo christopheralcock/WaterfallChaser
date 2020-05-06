@@ -17,46 +17,48 @@ public class Flinger : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (chaser.IsStationary())
-        {
-            Debug.Log("chaser stationary, colour green");
-            lar.colour = lar.green;
-        }
-        else
-        {
-            Debug.Log("chaser moving, colour red");
-            lar.colour = lar.red;
-        }
-        chaserPointer.Warp(GetMousePosition());
-
+        this.UpdatePointerAndArc();
     }
 
     private void OnMouseDrag()
     {
-        if (chaser.IsStationary())
-        {
-            Debug.Log("chaser stationary, colour green");
-            lar.colour = lar.green;
-        }
-        else
-        {
-            Debug.Log("chaser moving, colour red");
-            lar.colour = lar.red;
-        }
-        chaserPointer.Warp(GetMousePosition());
+        this.UpdatePointerAndArc();
     }
 
     private void OnMouseUp()
     {
         chaser.Jump(GetMousePosition());
         chaserPointer.Reset();
-        Debug.Log("flinger onmouseup");
     }
 
     private Vector3 GetMousePosition()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-        return mousePosition;
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    private void UpdatePointerAndArc()
+    {
+        if (chaser.flingable)
+        {
+            lar.SetLineReady(chaser.IsStationary());
+            chaserPointer.Warp(CalculatePower(), CalculateAngle());
+            lar.RenderArcPublic(CalculatePower(), CalculateAngle(), chaser.transform.position);
+        }
+    }
+
+    private Vector3 CalculateDirection()
+    {
+        return chaser.transform.position - GetMousePosition();
+    }
+
+    private float CalculatePower()
+    {
+        var direction = CalculateDirection();
+        return Mathf.Sqrt((direction.x * direction.x) + (direction.y * direction.y));
+    }
+
+    private float CalculateAngle()
+    {
+        return (Mathf.Atan2(chaser.transform.position.y - GetMousePosition().y, chaser.transform.position.x - GetMousePosition().x) * 180 / Mathf.PI);
     }
 }

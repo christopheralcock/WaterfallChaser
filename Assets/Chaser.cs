@@ -24,7 +24,7 @@ public class Chaser : MonoBehaviour
             Vector2 direction = currentPosition - mousePosition;
             GetComponent<Rigidbody2D>().AddForce(direction * speedMultiplier);
             flingable = false;
-            lar.colour = lar.red;
+            lar.SetLineReady(false);
         }
     }
 
