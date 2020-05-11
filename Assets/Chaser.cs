@@ -11,6 +11,9 @@ public class Chaser : MonoBehaviour
     private Rigidbody2D chaserRigidbody;
     private AudioSource audioSource;
 
+    bool firstAppearedOnScreen = false;
+    public bool dead = false;
+
     public void Awake()
     {
         this.chaserRigidbody = GetComponent<Rigidbody2D>();
@@ -29,7 +32,7 @@ public class Chaser : MonoBehaviour
     public void MakeFlingable()
     {
         this.flingable = true;
-        }
+    }
 
     private void OnCollisionEnter2D()
     {
@@ -44,12 +47,32 @@ public class Chaser : MonoBehaviour
 
     private void OnCollisionExit2D()
     {
-        this.flingable = false;    
-        }
+        this.flingable = false;
+    }
 
     public bool IsStationary()
     {
-       return this.chaserRigidbody.velocity.magnitude <= 0.1;
+        return this.IsBelowSpeed(0.1f);
+    }
+
+    public bool IsBelowSpeed(float speed)
+    {
+        return this.chaserRigidbody.velocity.magnitude <= speed;
+    }
+
+    private void OnBecameVisible()
+    {
+        this.firstAppearedOnScreen = true;
+    }
+
+
+    private void OnBecameInvisible()
+    {
+        Debug.Log("became invisible");
+        if (this.firstAppearedOnScreen) {
+            Debug.Log("became invisible after being first acknowledged visible");
+            this.dead = true;
+        } 
     }
 
 }
