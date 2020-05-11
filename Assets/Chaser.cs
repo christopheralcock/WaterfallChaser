@@ -10,6 +10,7 @@ public class Chaser : MonoBehaviour
     public bool stationary = false;
     private Rigidbody2D chaserRigidbody;
     private AudioSource audioSource;
+    public Collider2D col;
 
     bool firstAppearedOnScreen = false;
     public bool dead = false;
@@ -18,6 +19,7 @@ public class Chaser : MonoBehaviour
     {
         this.chaserRigidbody = GetComponent<Rigidbody2D>();
         this.audioSource = GetComponent<AudioSource>();
+        this.col = GetComponent<Collider2D>();
     }
 
     public void Jump(Vector2 mousePosition, Vector3 direction)
