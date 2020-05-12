@@ -8,6 +8,8 @@ public class Flinger : MonoBehaviour
     private ChaserPointer chaserPointer;
     public LaunchArcRenderer lar; 
     private AudioSource audioSource;
+    public CameraMover cameraMover;
+    public LevelController levelController;
 
 
     // Start is called before the first frame update
@@ -20,23 +22,47 @@ public class Flinger : MonoBehaviour
 
     private void OnMouseDown()
     {
-        this.UpdatePointerAndArc();
-        audioSource.pitch = 1;
-        audioSource.Play();
+        if (MouseIsBelowBall())
+        {
+            this.UpdatePointerAndArc();
+            audioSource.pitch = 1;
+            audioSource.Play();
+        }
+        else
+        {
+            levelController.firstScrollHappened = true;
+            cameraMover.MoveUp(cameraMover.voluntarySpeed);
+        }
     }
 
     private void OnMouseDrag()
     {
-        this.UpdatePointerAndArc();
+        if (MouseIsBelowBall())
+        {
+            this.UpdatePointerAndArc();
+        }
+        else
+        {
+            cameraMover.MoveUp(cameraMover.voluntarySpeed);
+        }
     }
 
     private void OnMouseUp()
     {
-        chaser.Jump(GetMousePosition(), CalculateDirection());
-        chaserPointer.Reset();
-        audioSource.pitch = 1.126f;
-        audioSource.Play();
-        lar.SetLineReady(false);
+        if (MouseIsBelowBall())
+        {
+            levelController.firstFlingHappened = true;
+            chaser.Jump(GetMousePosition(), CalculateDirection());
+            chaserPointer.Reset();
+            audioSource.pitch = 1.126f;
+            audioSource.Play();
+            lar.SetLineReady(false);
+        }
+    }
+
+    private bool MouseIsBelowBall()
+    {
+        return this.GetMousePosition().y < chaser.transform.position.y;
     }
 
     private Vector3 GetMousePosition()

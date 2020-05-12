@@ -12,6 +12,8 @@ public class LevelController : MonoBehaviour
     public Collider2D goalCollider;
     private bool levelActive = true;
     public bool levelComplete = false;
+    public bool firstFlingHappened = false;
+    public bool firstScrollHappened = false;
 
 
     private void Awake()
@@ -32,7 +34,7 @@ public class LevelController : MonoBehaviour
             Restart();
         }
 
-        if (chaser.col.IsTouching(goalCollider) && chaser.flingable){
+        if (chaser.col.IsTouching(goalCollider) && chaser.IsStationary()){
             this.SetLevelComplete();
         }
     }

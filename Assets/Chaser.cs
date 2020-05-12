@@ -54,7 +54,8 @@ public class Chaser : MonoBehaviour
 
     public bool IsStationary()
     {
-        return this.IsBelowSpeed(0.1f);
+        this.stationary = this.IsBelowSpeed(0.1f);
+        return this.stationary;
     }
 
     public bool IsBelowSpeed(float speed)

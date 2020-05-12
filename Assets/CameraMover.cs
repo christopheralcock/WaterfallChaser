@@ -7,6 +7,7 @@ public class CameraMover : MonoBehaviour
 
     public float speed;
     public float defaultSpeed = 0.01f;
+    public float voluntarySpeed = 0.05f;
     public Chaser chaser;
     public float movementSensitivity;
     public float defaultMovementSensitivity = 0.5f;
@@ -23,12 +24,12 @@ public class CameraMover : MonoBehaviour
     {
         if (!chaser.flingable)
         {
-            MoveUp();
+            MoveUp(speed);
         }
     }
 
-    void MoveUp()
+    public void MoveUp(float s)
     {
-        transform.Translate(new Vector3(0, speed));
+        transform.Translate(new Vector3(0, s));
     }
 }
