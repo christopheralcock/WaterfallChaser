@@ -16,13 +16,16 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.realTime += Time.deltaTime;
-        this.frameCount++;
-        this.frameRate = this.realTime / this.frameCount;
+        if (!levelController.levelComplete)
+        {
+            this.realTime += Time.deltaTime;
+            this.frameCount++;
+            this.frameRate = this.realTime / this.frameCount;
 
-        float contactSeconds = levelController.contactTimer * this.frameRate;
-        int score = (int)Mathf.Max(this.maxScore - contactSeconds, 0);
-        text.text = $"{score.ToString()} points";
-        Debug.Log((int)this.realTime);
+            float contactSeconds = levelController.contactTimer * this.frameRate;
+            int score = (int)Mathf.Max(this.maxScore - contactSeconds, 0);
+            text.text = $"{score.ToString()} points";
+            Debug.Log((int)this.realTime);
+        }
     }
 }
