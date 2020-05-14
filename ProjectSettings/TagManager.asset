@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Music
   - DontDestroy
+  - Major
+  - Minor
   layers:
   - Default
   - TransparentFX

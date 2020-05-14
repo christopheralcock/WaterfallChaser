@@ -12,6 +12,9 @@ public class Timer : MonoBehaviour
     public float frameRate = 1/60;
     public float realTime = 0;
     public int frameCount = 0;
+    public int score;
+    public int lastNumberToTriggerMusicChange;
+    public int contactSecondsBetweenMusicChanges = 8;
 
     // Update is called once per frame
     void Update()
@@ -21,11 +24,20 @@ public class Timer : MonoBehaviour
             this.realTime += Time.deltaTime;
             this.frameCount++;
             this.frameRate = this.realTime / this.frameCount;
-
             float contactSeconds = levelController.contactTimer * this.frameRate;
-            int score = (int)Mathf.Max(this.maxScore - contactSeconds, 0);
-            text.text = $"{score.ToString()} points";
-            Debug.Log((int)this.realTime);
+            this.score = (int)Mathf.Max(this.maxScore - contactSeconds, 0);
+            text.text = $"{this.score.ToString()} points";
+            if (this.score % this.contactSecondsBetweenMusicChanges == 0 && this.score != this.lastNumberToTriggerMusicChange)
+            {
+                this.ProgressMusic();
+                this.lastNumberToTriggerMusicChange = this.score;
+            }
         }
     }
+
+    public void ProgressMusic()
+    {
+        AudioControl.musicStage++;
+    }
+
 }
