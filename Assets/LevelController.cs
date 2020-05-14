@@ -34,7 +34,7 @@ public class LevelController : MonoBehaviour
             Restart();
         }
 
-        if (chaser.col.IsTouching(goalCollider) && chaser.IsStationary()){
+        if (chaser.col.IsTouching(goalCollider) && chaser.IsStationary() && !levelComplete){
             this.SetLevelComplete();
         }
     }

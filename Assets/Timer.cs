@@ -37,7 +37,7 @@ public class Timer : MonoBehaviour
 
     public void ProgressMusic()
     {
-        AudioControl.musicStage++;
+        //AudioControl.musicStage++;
     }
 
 }

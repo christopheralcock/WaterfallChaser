@@ -74,7 +74,7 @@ public class AudioControl : MonoBehaviour
     {
         if (this.updateMusicStage != musicStage)
         {
-            this.ProgressMusic();
+            //this.ProgressMusic();
             this.updateMusicStage = musicStage;
         }
     }
