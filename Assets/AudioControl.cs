@@ -9,7 +9,7 @@ public class AudioControl : MonoBehaviour
     public static bool initialised = false;
     //public GameObject music;
     public AudioSource major;
-    public AudioSource minor;
+    //public AudioSource minor;
     public bool initialisedSoICanSeeIt = initialised;
     public static int musicStage = 0;
     public int updateMusicStage = 0;
@@ -47,13 +47,13 @@ public class AudioControl : MonoBehaviour
         {
             Debug.Log("initialising");
             Instantiate(major);
-            Instantiate(minor);
+            //Instantiate(minor);
             AudioListener.volume = this.volume;
             //DontDestroyOnLoad(music);
             MarkMusicNonDestroy();
             initialised = true;
             major = GameObject.FindWithTag("Major").GetComponent<AudioSource>();
-            minor = GameObject.FindWithTag("Minor").GetComponent<AudioSource>();
+            //minor = GameObject.FindWithTag("Minor").GetComponent<AudioSource>();
         }
     }
 
@@ -63,10 +63,10 @@ public class AudioControl : MonoBehaviour
         {
             DontDestroyOnLoad(obj);
         }
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Minor"))
-        {
-            DontDestroyOnLoad(obj);
-        }
+        //foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Minor"))
+        //{
+        //    DontDestroyOnLoad(obj);
+        //}
     }
 
 
@@ -74,29 +74,29 @@ public class AudioControl : MonoBehaviour
     {
         if (this.updateMusicStage != musicStage)
         {
-            //this.ProgressMusic();
+            //this.ProgressM    usic();
             this.updateMusicStage = musicStage;
         }
     }
 
     void ProgressMusic()
     {
-        var pitchindex = musicStage % pitchOrder.Length;
-        var majorMinorIndex = musicStage % majorMinor.Length;
-        var pitch = pitchOrder[pitchindex]/440;
-        var chord = majorMinor[majorMinorIndex];
-        Debug.Log(pitch);
-        Debug.Log(chord);
-        if (chord == "major")
-        {
-            major.pitch = pitch;
-            major.Play();
-        }
-        if(chord == "minor")
-        {
-            minor.pitch = pitch;
-            minor.Play();
-        }
+        //var pitchindex = musicStage % pitchOrder.Length;
+        //var majorMinorIndex = musicStage % majorMinor.Length;
+        //var pitch = pitchOrder[pitchindex]/440;
+        //var chord = majorMinor[majorMinorIndex];
+        //Debug.Log(pitch);
+        //Debug.Log(chord);
+        //if (chord == "major")
+        //{
+        //    major.pitch = pitch;
+        //    major.Play();
+        //}
+        //if(chord == "minor")
+        //{
+        //    minor.pitch = pitch;
+        //    minor.Play();
+        //}
 
 
 

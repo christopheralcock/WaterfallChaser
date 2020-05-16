@@ -14,6 +14,7 @@ public class LevelController : MonoBehaviour
     public bool levelComplete = false;
     public bool firstFlingHappened = false;
     public bool firstScrollHappened = false;
+    public AudioSource success;
 
 
     private void Awake()
@@ -44,6 +45,7 @@ public class LevelController : MonoBehaviour
         this.levelActive = false;
         Debug.Log("LEVEL COLMPLETEEE");
         this.levelComplete = true;
+        success.Play();
     }
 
     public static void Restart()
