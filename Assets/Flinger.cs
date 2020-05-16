@@ -25,8 +25,7 @@ public class Flinger : MonoBehaviour
         if (MouseIsBelowBall())
         {
             this.UpdatePointerAndArc();
-            audioSource.pitch = 1;
-            audioSource.Play();
+            PitchHandler.Play(audioSource, 1, "flinger");
         }
         else
         {
@@ -54,8 +53,7 @@ public class Flinger : MonoBehaviour
             levelController.firstFlingHappened = true;
             chaser.Jump(GetMousePosition(), CalculateDirection());
             chaserPointer.Reset();
-            audioSource.pitch = 1.126f;
-            audioSource.Play();
+            PitchHandler.Play(audioSource, 1, "flinger");
             lar.SetLineReady(false);
         }
     }

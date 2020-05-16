@@ -39,7 +39,7 @@ public class Chaser : MonoBehaviour
     private void OnCollisionEnter2D()
     {
         this.MakeFlingable();
-        PitchHandler.Play(audioSource, this.chaserRigidbody.velocity.magnitude);
+        PitchHandler.Play(audioSource, this.chaserRigidbody.velocity.magnitude, "chaser");
     }
 
     private void OnCollisionStay2D()
