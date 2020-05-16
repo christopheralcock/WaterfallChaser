@@ -43,7 +43,6 @@ public class LevelController : MonoBehaviour
     void SetLevelComplete()
     {
         this.levelActive = false;
-        Debug.Log("LEVEL COLMPLETEEE");
         this.levelComplete = true;
         success.Play();
     }
