@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class LevelController : MonoBehaviour
 {
@@ -15,10 +16,15 @@ public class LevelController : MonoBehaviour
     public bool firstFlingHappened = false;
     public bool firstScrollHappened = false;
     public AudioSource success;
+    string sceneName;
+    static int levelIndex;
+    static public string[] levelList = { "Intro", "ElClassico" };
 
 
     private void Awake()
     {
+        sceneName = SceneManager.GetActiveScene().name;
+        levelIndex = Array.IndexOf(levelList, sceneName);
         goalCollider = goal.GetComponent<Collider2D>();
     }
 
@@ -45,10 +51,16 @@ public class LevelController : MonoBehaviour
         this.levelActive = false;
         this.levelComplete = true;
         success.Play();
+        //this.NextLevel();
     }
 
     public static void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 }
+    public void NextLevel()
+    {
+        levelIndex = (levelIndex +1)%levelList.Length;
+        SceneManager.LoadScene(levelList[levelIndex]);
+    }
 }
