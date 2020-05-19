@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour
 
     public Chaser chaser;
     public int contactTimer = 0;
-    public GameObject goal;
+    public Goal goal;
     public Collider2D goalCollider;
     private bool levelActive = true;
     public bool levelComplete = false;
@@ -18,14 +18,17 @@ public class LevelController : MonoBehaviour
     public AudioSource success;
     string sceneName;
     static int levelIndex;
-    static public string[] levelList = { "Intro", "ElClassico" };
+    static public string[] levelList = { "Intro", "BabySteps", "ElClassico" };
 
 
     private void Awake()
     {
+        this.success = FindObjectOfType<SuccessChime>().GetComponent<AudioSource>();
+        Debug.Log("level controller awakens");
         sceneName = SceneManager.GetActiveScene().name;
         levelIndex = Array.IndexOf(levelList, sceneName);
-        goalCollider = goal.GetComponent<Collider2D>();
+        goal = FindObjectOfType<Goal>();
+        goalCollider = goal.GetComponentsInChildren<Collider2D>()[0];
         chaser = FindObjectOfType<Chaser>();
     }
 
