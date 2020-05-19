@@ -15,6 +15,7 @@ public class CameraMover : MonoBehaviour
 
     private void Awake()
     {
+        chaser = FindObjectOfType<Chaser>();
         this.speed = this.defaultSpeed;
         this.movementSensitivity = this.defaultMovementSensitivity;
 

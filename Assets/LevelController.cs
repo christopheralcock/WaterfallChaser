@@ -26,6 +26,7 @@ public class LevelController : MonoBehaviour
         sceneName = SceneManager.GetActiveScene().name;
         levelIndex = Array.IndexOf(levelList, sceneName);
         goalCollider = goal.GetComponent<Collider2D>();
+        chaser = FindObjectOfType<Chaser>();
     }
 
 

@@ -17,6 +17,8 @@ public class Flinger : MonoBehaviour
     {
         chaser = FindObjectOfType<Chaser>();
         chaserPointer = FindObjectOfType<ChaserPointer>();
+        chaserPointer.GetComponent<FixedJoint2D>().connectedBody = chaser.GetComponent<Rigidbody2D>();
+        lar = FindObjectOfType<LaunchArcRenderer>();
         audioSource = GetComponent<AudioSource>();
     }
 

@@ -14,6 +14,11 @@ public class Timer : MonoBehaviour
     public int frameCount = 0;
     public int score;
 
+    private void Awake()
+    {
+        this.levelController = FindObjectOfType<LevelController>();
+    }
+
     // Update is called once per frame
     void Update()
     {

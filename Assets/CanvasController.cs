@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextDisplayer : MonoBehaviour
+public class CanvasController : MonoBehaviour
 {
 
     public LevelController levelController;
-    public Text complete;
+    public Text completionMessage;
     public Text scrollInstructions;
     public Text flingInstructions;
-    public GameObject nextLevelButton;
+    public NextLevelButton nextLevelButton;
     public bool levelComplete = false;
 
 
     void Awake()
     {
-        nextLevelButton.SetActive(false);
+        this.levelController = FindObjectOfType<LevelController>();
+        this.completionMessage = GameObject.FindGameObjectWithTag("CompletionMessage").GetComponent<Text>();
+        this.nextLevelButton = FindObjectOfType<NextLevelButton>();
+        this.nextLevelButton.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,7 +27,7 @@ public class TextDisplayer : MonoBehaviour
     {
         if (levelController.levelComplete && !this.levelComplete)
         {
-//            complete.text = @"
+//            completionMessage.text = @"
 //CONGRATULATIONS!
 
 //LEVEL COMPLETE!
@@ -33,7 +36,7 @@ public class TextDisplayer : MonoBehaviour
 
 //GIVE CHRIS SOME FEEDBACK
 //@chrisalcockdev";
-            nextLevelButton.SetActive(true);
+            nextLevelButton.gameObject.SetActive(true);
             this.levelComplete = true;
         }
 

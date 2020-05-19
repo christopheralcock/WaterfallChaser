@@ -11,7 +11,6 @@ public class Chaser : MonoBehaviour
     private Rigidbody2D chaserRigidbody;
     private AudioSource audioSource;
     public Collider2D col;
-
     bool firstAppearedOnScreen = false;
     public bool dead = false;
 
