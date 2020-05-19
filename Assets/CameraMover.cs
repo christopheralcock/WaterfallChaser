@@ -11,6 +11,7 @@ public class CameraMover : MonoBehaviour
     public Chaser chaser;
     public float movementSensitivity;
     public float defaultMovementSensitivity = 0.5f;
+    public LevelController levelController;
 
 
     private void Awake()
@@ -18,7 +19,7 @@ public class CameraMover : MonoBehaviour
         chaser = FindObjectOfType<Chaser>();
         this.speed = this.defaultSpeed;
         this.movementSensitivity = this.defaultMovementSensitivity;
-
+        this.levelController = FindObjectOfType<LevelController>();
     }
 
     void Update()
@@ -31,6 +32,8 @@ public class CameraMover : MonoBehaviour
 
     public void MoveUp(float s)
     {
+        if (!levelController.levelComplete) { 
         transform.Translate(new Vector3(0, s));
+        }
     }
 }
