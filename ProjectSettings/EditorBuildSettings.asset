@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ElClassico.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/WoodForTrees.unity
+    guid: c5d380b985ddc4d088269abd1e5f48ff
   m_configObjects: {}

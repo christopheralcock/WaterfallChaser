@@ -6,7 +6,7 @@ public class CameraMover : MonoBehaviour
 {
 
     public float speed;
-    public float defaultSpeed = 0.01f;
+    public float defaultSpeed = 0.015f;
     public float voluntarySpeed = 0.05f;
     public Chaser chaser;
     public float movementSensitivity;
