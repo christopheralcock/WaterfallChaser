@@ -18,7 +18,13 @@ public class LevelController : MonoBehaviour
     public AudioSource success;
     string sceneName;
     static int levelIndex;
-    static public string[] levelList = { "Intro", "BabySteps", "ElClassico", "WoodForTrees" };
+    static public string[] levelList = { 
+        "Intro", 
+        "BabySteps", 
+        "ElClassico", 
+        "Jungle", 
+        "WoodForTrees" 
+        };
 
 
     private void Awake()

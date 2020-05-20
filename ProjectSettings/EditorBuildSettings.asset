@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WoodForTrees.unity
     guid: c5d380b985ddc4d088269abd1e5f48ff
+  - enabled: 1
+    path: Assets/Scenes/Jungle.unity
+    guid: d727a262cb58f4a1d9c71472806aa734
   m_configObjects: {}
