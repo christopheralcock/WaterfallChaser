@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jungle.unity
     guid: d727a262cb58f4a1d9c71472806aa734
+  - enabled: 1
+    path: Assets/Scenes/SkiJump.unity
+    guid: f034b3a0dcdd742c78cd1b6a02b14b61
   m_configObjects: {}

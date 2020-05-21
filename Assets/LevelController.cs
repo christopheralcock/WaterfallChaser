@@ -23,7 +23,8 @@ public class LevelController : MonoBehaviour
         "BabySteps", 
         "ElClassico", 
         "Jungle", 
-        "WoodForTrees" 
+        "WoodForTrees",
+        "SkiJump"
         };
 
 
