@@ -37,17 +37,17 @@ public class Bird : MonoBehaviour
         var wingHeight = wing.transform.localScale.y;
         if (flapUp && wingHeight <= flapExtent)
         {
-            wing.transform.localScale = new Vector2(1, wing.transform.localScale.y + flapSpeed);
+            wing.transform.localScale = new Vector2(1, wingHeight + flapSpeed);
         }
-        if (wing.transform.localScale.y >= flapExtent)
+        if (wingHeight >= flapExtent)
         {
             flapUp = false;
         }
-        if (!flapUp && wing.transform.localScale.y >= -flapExtent)
+        if (!flapUp && wingHeight >= -flapExtent)
         {
-            wing.transform.localScale = new Vector2(1, wing.transform.localScale.y - flapSpeed);
+            wing.transform.localScale = new Vector2(1, wingHeight - flapSpeed);
         }
-        if (wing.transform.localScale.y <= -flapExtent)
+        if (wingHeight <= -flapExtent)
         {
             flapUp = true;
         }

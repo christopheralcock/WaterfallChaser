@@ -14,7 +14,7 @@ public class Cradle : MonoBehaviour
     {
         if (this is Goal)
         {
-            Debug.Log("its a goal");
+            //Debug.Log("its a goal");
             this.mainColour = Goal.goalColour;
         }
         var spriteRenderers = GetComponentsInChildren<SpriteRenderer>();

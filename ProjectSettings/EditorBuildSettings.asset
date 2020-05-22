@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SkiJump.unity
     guid: f034b3a0dcdd742c78cd1b6a02b14b61
+  - enabled: 1
+    path: Assets/Scenes/Boss1.unity
+    guid: 62782a5c8eb8c46b0a9bb03b873895a7
   m_configObjects: {}

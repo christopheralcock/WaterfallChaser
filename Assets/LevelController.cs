@@ -21,10 +21,12 @@ public class LevelController : MonoBehaviour
     static public string[] levelList = { 
         "Intro", 
         "BabySteps", 
-        "ElClassico", 
+        "ElClassico",
+        "Boss1",
         "Jungle", 
         "WoodForTrees",
-        "SkiJump"
+        "SkiJump",
+        "Boss1"
         };
 
 

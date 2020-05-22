@@ -12,7 +12,7 @@ public class CameraMover : MonoBehaviour
     public float movementSensitivity;
     public float defaultMovementSensitivity = 0.5f;
     public LevelController levelController;
-
+    public bool stationaryLevel = false;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class CameraMover : MonoBehaviour
 
     public void MoveUp(float s)
     {
-        if (!levelController.levelComplete) { 
+        if (!stationaryLevel && !levelController.levelComplete) { 
         transform.Translate(new Vector3(0, s));
         }
     }
