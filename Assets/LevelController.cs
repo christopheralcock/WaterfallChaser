@@ -9,7 +9,6 @@ public class LevelController : MonoBehaviour
 
     public Chaser chaser;
     public int contactTimer = 0;
-    public Goal goal;
     public Collider2D goalCollider;
     private bool levelActive = true;
     public bool levelComplete = false;
@@ -36,8 +35,7 @@ public class LevelController : MonoBehaviour
         Debug.Log("level controller awakens");
         sceneName = SceneManager.GetActiveScene().name;
         levelIndex = Array.IndexOf(levelList, sceneName);
-        goal = FindObjectOfType<Goal>();
-        goalCollider = goal.GetComponentsInChildren<Collider2D>()[0];
+        goalCollider = FindObjectOfType<GoalCompletionDetector>().GetComponentsInChildren<Collider2D>()[0];
         chaser = FindObjectOfType<Chaser>();
     }
 
@@ -54,9 +52,15 @@ public class LevelController : MonoBehaviour
             Restart();
         }
 
-        if (chaser.col.IsTouching(goalCollider) && chaser.IsStationary() && !levelComplete){
+        if (GoalAchieved())
+        {
             this.SetLevelComplete();
         }
+    }
+
+    bool GoalAchieved()
+    {
+        return chaser.col.IsTouching(goalCollider) && chaser.IsStationary() && !levelComplete;
     }
 
     void SetLevelComplete()
