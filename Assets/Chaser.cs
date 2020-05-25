@@ -11,7 +11,7 @@ public class Chaser : MonoBehaviour
     private Rigidbody2D chaserRigidbody;
     private AudioSource audioSource;
     public Collider2D col;
-    bool firstAppearedOnScreen = false;
+    //bool firstAppearedOnScreen = false;
     public bool dead = false;
     public float shrinkSpeed = 0.99f;
 
@@ -66,22 +66,22 @@ public class Chaser : MonoBehaviour
         return this.chaserRigidbody.velocity.magnitude <= speed;
     }
 
-    private void OnBecameVisible()
-    {
-        this.firstAppearedOnScreen = true;
-    }
+    //private void OnBecameVisible()
+    //{
+    //    this.firstAppearedOnScreen = true;
+    //}
 
 
-    private void OnBecameInvisible()
-    {
-        Debug.Log("became invisible");
-        //Debug.Log(cameraXExtent);
-        if (this.firstAppearedOnScreen && this.IllegallyOutOfBounds())
-        {
-            Debug.Log("became invisible after being first acknowledged visible");
-            this.dead = true;
-        } 
-    }
+    //private void OnBecameInvisible()
+    //{
+    //    Debug.Log("became invisible");
+    //    //Debug.Log(cameraXExtent);
+    //    if (this.firstAppearedOnScreen && this.IllegallyOutOfBounds())
+    //    {
+    //        Debug.Log("became invisible after being first acknowledged visible");
+    //        this.dead = true;
+    //    } 
+    //}
 
     bool IllegallyOutOfBounds()
     {
@@ -96,6 +96,11 @@ public class Chaser : MonoBehaviour
 
     private void Update()
     {
+        if (IllegallyOutOfBounds())
+        {
+            this.dead = true;
+        }
+
         if (this.dead)
         {
             var size = this.transform.localScale;
