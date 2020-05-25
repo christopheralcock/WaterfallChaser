@@ -93,6 +93,12 @@ public class Chaser : MonoBehaviour
         return illegalX || illegalY;
     }
 
+    public bool OffTheTop()
+    {
+        var cameraYMaxExtent = FindObjectOfType<CameraMover>().transform.position.y + CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.y - transform.localScale.y;
+        return this.transform.position.y > cameraYMaxExtent;
+    }
+
 
     private void Update()
     {

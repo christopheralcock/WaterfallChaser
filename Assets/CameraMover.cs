@@ -24,7 +24,7 @@ public class CameraMover : MonoBehaviour
 
     void Update()
     {
-        if (!chaser.flingable)
+        if (!chaser.flingable || chaser.OffTheTop())
         {
             MoveUp(speed);
         }
