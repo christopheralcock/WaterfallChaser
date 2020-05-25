@@ -14,6 +14,7 @@ public class CanvasController : MonoBehaviour
     public Text flingInstructions;
     bool flingInstructionsPresent = false;
     public NextLevelButton nextLevelButton;
+    public RestartLevelButton restartLevelButton;
     public bool levelComplete = false;
     public string completionMessageString = @"
 CONGRATULATIONS!
@@ -31,6 +32,8 @@ GIVE CHRIS SOME FEEDBACK
         this.levelController = FindObjectOfType<LevelController>();
         this.nextLevelButton = FindObjectOfType<NextLevelButton>();
         this.nextLevelButton.gameObject.SetActive(false);
+        this.restartLevelButton = FindObjectOfType<RestartLevelButton>();
+        this.restartLevelButton.gameObject.SetActive(false);
 
         try
         {
@@ -68,6 +71,12 @@ GIVE CHRIS SOME FEEDBACK
     // Update is called once per frame
     void Update()
     {
+
+        if (levelController.readyToRestart)
+        {
+            this.restartLevelButton.gameObject.SetActive(true);
+        }
+
         if (levelController.levelComplete && !this.levelComplete)
         {
             nextLevelButton.gameObject.SetActive(true);
@@ -87,6 +96,11 @@ GIVE CHRIS SOME FEEDBACK
         {
             scrollInstructions.text = null;
             scrollInstructionsPresent = false;
+        }
+
+        if (levelController.readyToRestart)
+        {
+
         }
     }
 }

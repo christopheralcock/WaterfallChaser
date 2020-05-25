@@ -13,6 +13,7 @@ public class Chaser : MonoBehaviour
     public Collider2D col;
     bool firstAppearedOnScreen = false;
     public bool dead = false;
+    public float shrinkSpeed = 0.99f;
 
     public void Awake()
     {
@@ -37,8 +38,11 @@ public class Chaser : MonoBehaviour
 
     private void OnCollisionEnter2D()
     {
-        this.MakeFlingable();
-        PitchHandler.Play(audioSource, this.chaserRigidbody.velocity.magnitude, "chaser");
+        if (!this.dead)
+        {
+            this.MakeFlingable();
+            PitchHandler.Play(audioSource, this.chaserRigidbody.velocity.magnitude, "chaser");
+        }
     }
 
     private void OnCollisionStay2D()
@@ -71,10 +75,32 @@ public class Chaser : MonoBehaviour
     private void OnBecameInvisible()
     {
         Debug.Log("became invisible");
-        if (this.firstAppearedOnScreen) {
+        //Debug.Log(cameraXExtent);
+        if (this.firstAppearedOnScreen && this.IllegallyOutOfBounds())
+        {
             Debug.Log("became invisible after being first acknowledged visible");
             this.dead = true;
         } 
+    }
+
+    bool IllegallyOutOfBounds()
+    {
+        var cameraXMaxExtent = FindObjectOfType<CameraMover>().transform.position.x + CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.x;
+        var cameraXMinExtent = FindObjectOfType<CameraMover>().transform.position.x - CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.x;
+        var cameraYMinExtent = FindObjectOfType<CameraMover>().transform.position.y - CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.y;
+        var illegalX = (this.transform.position.x > cameraXMaxExtent || this.transform.position.x < cameraXMinExtent);
+        var illegalY = this.transform.position.y < cameraYMinExtent;
+        return illegalX || illegalY;
+    }
+
+
+    private void Update()
+    {
+        if (this.dead)
+        {
+            var size = this.transform.localScale;
+            this.transform.localScale = new Vector3(size.x * shrinkSpeed, size.x * shrinkSpeed, size.x * shrinkSpeed);
+        }
     }
 
 }

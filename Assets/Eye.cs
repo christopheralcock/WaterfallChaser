@@ -20,7 +20,7 @@ public class Eye : MonoBehaviour
         Debug.Log("eye registers collision");
         Debug.Log(collision.collider.ToString());
 
-        if (collision.collider.Equals(chaser.GetComponent<Collider2D>()))
+        if (collision.collider.Equals(chaser.GetComponent<Collider2D>()) && !chaser.dead)
         {
             Debug.Log("destroy boss called");
             boss.Destruct();

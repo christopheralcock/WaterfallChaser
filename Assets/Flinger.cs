@@ -25,41 +25,50 @@ public class Flinger : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (MouseIsBelowBall())
-        {   
-            this.UpdatePointerAndArc();
-            PitchHandler.Play(audioSource, 1, "flinger");
-        }
-        else
+        if (!chaser.dead)
         {
-            levelController.firstScrollHappened = true;
-            cameraMover.MoveUp(cameraMover.voluntarySpeed);
-            NeutralisePointerAndArc();
+            if (MouseIsBelowBall())
+            {
+                this.UpdatePointerAndArc();
+                PitchHandler.Play(audioSource, 1, "flinger");
+            }
+            else
+            {
+                levelController.firstScrollHappened = true;
+                cameraMover.MoveUp(cameraMover.voluntarySpeed);
+                NeutralisePointerAndArc();
+            }
         }
     }
 
     private void OnMouseDrag()
     {
-        if (MouseIsBelowBall())
+        if (!chaser.dead)
         {
-            this.UpdatePointerAndArc();
-        }
-        else
-        {
-            cameraMover.MoveUp(cameraMover.voluntarySpeed);
-            NeutralisePointerAndArc();
+            if (MouseIsBelowBall())
+            {
+                this.UpdatePointerAndArc();
+            }
+            else
+            {
+                cameraMover.MoveUp(cameraMover.voluntarySpeed);
+                NeutralisePointerAndArc();
+            }
         }
     }
 
     private void OnMouseUp()
     {
-        if (MouseIsBelowBall() && !levelController.levelComplete)
+        if (!chaser.dead)
         {
-            levelController.firstFlingHappened = true;
-            chaser.Jump(GetMousePosition(), CalculateDirection());
-            chaserPointer.Reset();
-            PitchHandler.Play(audioSource, 1, "flinger");
-            lar.SetLineReady(false);
+            if (MouseIsBelowBall() && !levelController.levelComplete)
+            {
+                levelController.firstFlingHappened = true;
+                chaser.Jump(GetMousePosition(), CalculateDirection());
+                chaserPointer.Reset();
+                PitchHandler.Play(audioSource, 1, "flinger");
+                lar.SetLineReady(false);
+            }
         }
     }
 

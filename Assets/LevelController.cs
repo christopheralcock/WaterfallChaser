@@ -14,6 +14,7 @@ public class LevelController : MonoBehaviour
     public bool levelComplete = false;
     public bool firstFlingHappened = false;
     public bool firstScrollHappened = false;
+    public bool readyToRestart = false;
     public AudioSource success;
     string sceneName;
     static int levelIndex;
@@ -49,7 +50,7 @@ public class LevelController : MonoBehaviour
 
         if (chaser.dead)
         {
-            Restart();
+            this.readyToRestart = true;
         }
 
         if (GoalAchieved())
@@ -60,7 +61,7 @@ public class LevelController : MonoBehaviour
 
     bool GoalAchieved()
     {
-        return chaser.col.IsTouching(goalCollider) && chaser.IsStationary() && !levelComplete;
+        return chaser.col.IsTouching(goalCollider) && chaser.IsStationary() && !levelComplete && !chaser.dead;
     }
 
     void SetLevelComplete()
@@ -74,7 +75,8 @@ public class LevelController : MonoBehaviour
     public static void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-}
+    }
+
     public void NextLevel()
     {
         levelIndex = (levelIndex +1)%levelList.Length;
