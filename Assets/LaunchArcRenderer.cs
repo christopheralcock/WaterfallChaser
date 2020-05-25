@@ -39,6 +39,17 @@ public class LaunchArcRenderer : MonoBehaviour
         this.RenderArc();
     }
 
+    public void RenderArcPublic(bool boolean)
+    {
+        if (boolean == false)
+        {
+            this.velocity = 0;
+            this.colour = Color.clear;
+            this.RenderArc();
+        }
+
+    }
+
     // if angle is negative, i don't want an arc as it's just misleading in all cases at the moment
     private void MakeInvisibleIfDownwards()
     {

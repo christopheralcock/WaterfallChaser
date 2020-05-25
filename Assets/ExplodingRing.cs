@@ -30,9 +30,16 @@ public class ExplodingRing : MonoBehaviour
         {
             Debug.Log("ring exploding");
             this.transform.localScale = new Vector2(
-                this.transform.localScale.x + this.speed, 
+                this.transform.localScale.x + this.speed,
                 this.transform.localScale.y + this.speed
                 );
+
+
+            if (this.transform.localScale.x > 4)
+            {
+                this.exploding = false;
+                //this.gameObject.SetActive(false);
+            }
         }
     }
 }

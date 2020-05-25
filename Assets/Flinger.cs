@@ -34,6 +34,7 @@ public class Flinger : MonoBehaviour
         {
             levelController.firstScrollHappened = true;
             cameraMover.MoveUp(cameraMover.voluntarySpeed);
+            NeutralisePointerAndArc();
         }
     }
 
@@ -46,6 +47,7 @@ public class Flinger : MonoBehaviour
         else
         {
             cameraMover.MoveUp(cameraMover.voluntarySpeed);
+            NeutralisePointerAndArc();
         }
     }
 
@@ -95,5 +97,11 @@ public class Flinger : MonoBehaviour
     private float CalculateAngle()
     {
         return (Mathf.Atan2(chaser.transform.position.y - GetMousePosition().y, chaser.transform.position.x - GetMousePosition().x) * 180 / Mathf.PI);
+    }
+
+    private void NeutralisePointerAndArc()
+    {
+        lar.RenderArcPublic(false);
+        chaserPointer.Warp(0, 0);
     }
 }

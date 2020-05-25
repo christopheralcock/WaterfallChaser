@@ -5,6 +5,8 @@ using UnityEngine;
 public class ChaserKiller : MonoBehaviour
 {
     public Chaser chaser;
+    public List<ChaserKiller> allChaserKillers;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +23,10 @@ public class ChaserKiller : MonoBehaviour
             Debug.Log("should be killing chaser");
             chaser.dead = true;
         }
+
+        //if (collision.gameObject.GetComponent<ChaserKiller>())
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
 }
