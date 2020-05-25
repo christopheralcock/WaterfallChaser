@@ -85,8 +85,8 @@ public class Chaser : MonoBehaviour
 
     bool IllegallyOutOfBounds()
     {
-        var cameraXMaxExtent = FindObjectOfType<CameraMover>().transform.position.x + CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.x;
-        var cameraXMinExtent = FindObjectOfType<CameraMover>().transform.position.x - CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.x;
+        var cameraXMaxExtent = FindObjectOfType<CameraMover>().transform.position.x + (CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.x + transform.localScale.x);
+        var cameraXMinExtent = FindObjectOfType<CameraMover>().transform.position.x - (CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.x + transform.localScale.x);
         var cameraYMinExtent = FindObjectOfType<CameraMover>().transform.position.y - CameraExtensions.OrthographicBounds(FindObjectOfType<Camera>()).extents.y;
         var illegalX = (this.transform.position.x > cameraXMaxExtent || this.transform.position.x < cameraXMinExtent);
         var illegalY = this.transform.position.y < cameraYMinExtent;
