@@ -38,6 +38,7 @@ public class LevelController : MonoBehaviour
         levelIndex = Array.IndexOf(levelList, sceneName);
         goalCollider = FindObjectOfType<GoalCompletionDetector>().GetComponentsInChildren<Collider2D>()[0];
         chaser = FindObjectOfType<Chaser>();
+
     }
 
 
