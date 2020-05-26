@@ -16,7 +16,6 @@ public class ChaserKiller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collission with chaser killer");
 
         if (collision.collider.Equals(chaser.GetComponent<Collider2D>()))
         {

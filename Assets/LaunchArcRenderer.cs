@@ -43,7 +43,7 @@ public class LaunchArcRenderer : MonoBehaviour
     {
         if (boolean == false)
         {
-            this.velocity = 0;
+            this.velocity = 1;
             this.colour = Color.clear;
             this.RenderArc();
         }

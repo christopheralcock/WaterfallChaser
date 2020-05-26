@@ -5,20 +5,27 @@ using UnityEngine;
 public class AudioControl : MonoBehaviour
 {
     public float volume = 1;
-    public static bool initialised = false;
+    public static bool basslineInitialised = false;
     public AudioSource bassline;
+    //public bool BossLevel = false;
+    //public static bool bossMusicInitialised = false;
+    //public AudioSource bossMusic;
+
 
     void Awake()
     {
-        if (initialised == false)
+        if (!basslineInitialised)
         {
-            Debug.Log("initialising");
             Instantiate(bassline);
             AudioListener.volume = this.volume;
-            MarkMusicNonDestroy();
-            initialised = true;
-            bassline = GameObject.FindWithTag("Bassline").GetComponent<AudioSource>();
+            //MarkMusicNonDestroy();
+            DontDestroyOnLoad(FindObjectOfType<ConstantMusic>());
+            //Debug.Log("marking " + bassline.gameObject.ToString() + " don't destroy on load");
+            //DontDestroyOnLoad(bassline.gameObject);
+            basslineInitialised = true;
         }
+
+
     }
 
     void MarkMusicNonDestroy()

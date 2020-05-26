@@ -17,8 +17,8 @@ public class Eye : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("eye registers collision");
-        Debug.Log(collision.collider.ToString());
+        //Debug.Log("eye registers collision");
+        //Debug.Log(collision.collider.ToString());
 
         if (collision.collider.Equals(chaser.GetComponent<Collider2D>()) && !chaser.dead)
         {

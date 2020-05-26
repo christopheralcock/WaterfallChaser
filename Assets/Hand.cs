@@ -27,7 +27,7 @@ public class Hand : ChaserKiller
     {
         var x = GetXForce();
         var y = GetYForce();
-        Debug.Log("random force applied: " + x + "," + y);
+        //Debug.Log("random force applied: " + x + "," + y);
         this.rigidBody.AddForce(new Vector2(x,y));
     }
 
