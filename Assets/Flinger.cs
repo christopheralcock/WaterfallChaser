@@ -31,6 +31,7 @@ public class Flinger : MonoBehaviour
             {
                 this.UpdatePointerAndArc();
                 PitchHandler.Play(audioSource, 1, "flinger");
+
             }
             else
             {
@@ -64,10 +65,12 @@ public class Flinger : MonoBehaviour
             if (MouseIsBelowBall() && !levelController.levelComplete)
             {
                 levelController.firstFlingHappened = true;
-                chaser.Jump(GetMousePosition(), CalculateDirection());
+                chaser.Jump(CalculateDirection());
+                // why calculate direction for one and calculate angle for other? is this why they decouple?
                 chaserPointer.Reset();
                 PitchHandler.Play(audioSource, 1, "flinger");
                 lar.SetLineReady(false);
+
             }
         }
     }
@@ -84,6 +87,9 @@ public class Flinger : MonoBehaviour
 
     private void UpdatePointerAndArc()
     {
+
+        lar.RenderArcTracer();
+
         if (chaser.flingable && !levelController.levelComplete)
         {
             lar.SetLineReady(chaser.IsStationary());
@@ -105,7 +111,9 @@ public class Flinger : MonoBehaviour
 
     private float CalculateAngle()
     {
-        return (Mathf.Atan2(chaser.transform.position.y - GetMousePosition().y, chaser.transform.position.x - GetMousePosition().x) * 180 / Mathf.PI);
+        return Vector3.Angle(new Vector3(1,0,0), this.CalculateDirection());
+        // is the below implementation what's wrong with the iphone? can i find a better direction -> angle calc?
+        //return (Mathf.Atan2(chaser.transform.position.y - GetMousePosition().y, chaser.transform.position.x - GetMousePosition().x) * 180 / Mathf.PI);
     }
 
     private void NeutralisePointerAndArc()

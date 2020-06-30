@@ -22,7 +22,7 @@ public class Chaser : MonoBehaviour
         this.col = GetComponent<Collider2D>();
     }
 
-    public void Jump(Vector2 mousePosition, Vector3 direction)
+    public void Jump(Vector3 direction)
     {
         if (flingable == true)
         {

@@ -18,7 +18,8 @@ public class LevelController : MonoBehaviour
     public AudioSource success;
     string sceneName;
     static int levelIndex;
-    static public string[] levelList = { 
+    static public string[] levelList = {
+        "FactorTest",
         "Intro", 
         "BabySteps", 
         "ElClassico",
@@ -38,6 +39,7 @@ public class LevelController : MonoBehaviour
         levelIndex = Array.IndexOf(levelList, sceneName);
         goalCollider = FindObjectOfType<GoalCompletionDetector>().GetComponentsInChildren<Collider2D>()[0];
         chaser = FindObjectOfType<Chaser>();
+        Application.targetFrameRate = 30;
 
     }
 

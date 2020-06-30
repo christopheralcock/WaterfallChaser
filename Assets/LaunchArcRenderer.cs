@@ -16,9 +16,11 @@ public class LaunchArcRenderer : MonoBehaviour
     public int resolution;
     public Color colour;
     private Color paleGreen = new Color(0, 255, 0, 0.5f);
-    float magicNumberThatWorks = 4; // no idea yet why 4 is the factor that sizes the line up to match the path
+    public float magicNumberThatWorks = 4; // no idea yet why 4 is the factor that sizes the line up to match the path
     float g; // force of gravity on the y axis
     float radianAngle;
+    float freakyIPhoneAngleCorrectionFactor = 0;
+    public GameObject tracer;
 
 
     private void Awake()
@@ -33,7 +35,7 @@ public class LaunchArcRenderer : MonoBehaviour
     public void RenderArcPublic(float inputVelocity, float inputAngle, Vector3 inputOrigin)
     {
         this.velocity = inputVelocity * this.magicNumberThatWorks;
-        this.angle = inputAngle;
+        this.angle = inputAngle - freakyIPhoneAngleCorrectionFactor;
         this.transform.position = inputOrigin;
         this.MakeInvisibleIfDownwards();
         this.RenderArc();
@@ -47,6 +49,14 @@ public class LaunchArcRenderer : MonoBehaviour
             this.colour = Color.clear;
             this.RenderArc();
         }
+
+    }
+
+    public void RenderArcTracer()
+    {
+        // how am i going to do this? attempt to just send a ball every frame, high power low gravity?
+        // every frame, create a 'fake' ball, launch it? feels like it's going to suck but let's have a go and see
+        Instantiate(tracer, this.transform);
 
     }
 
@@ -67,9 +77,9 @@ public class LaunchArcRenderer : MonoBehaviour
     // populating line renderer settings
     void RenderArc()
     {
-            lr.material.color = this.colour;
-            lr.positionCount = resolution + 1;
-            lr.SetPositions(CalculateArcArray());
+            //lr.material.color = this.colour;
+            //lr.positionCount = resolution + 1;
+            //lr.SetPositions(CalculateArcArray());
     }
 
     Vector3[] CalculateArcArray()
@@ -101,6 +111,7 @@ public class LaunchArcRenderer : MonoBehaviour
         if (ready)
         {
             this.colour = Color.green;
+
         }
         else
         {
