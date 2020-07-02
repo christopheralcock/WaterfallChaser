@@ -49,6 +49,8 @@ public class Flinger : MonoBehaviour
             if (MouseIsBelowBall())
             {
                 this.UpdatePointerAndArc();
+                lar.RenderArcTracer();
+
             }
             else
             {
@@ -88,7 +90,6 @@ public class Flinger : MonoBehaviour
     private void UpdatePointerAndArc()
     {
 
-        lar.RenderArcTracer();
 
         if (chaser.flingable && !levelController.levelComplete)
         {

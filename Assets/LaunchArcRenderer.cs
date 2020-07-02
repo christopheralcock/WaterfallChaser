@@ -8,7 +8,7 @@ public class LaunchArcRenderer : MonoBehaviour
 {
 
     LineRenderer lr;
-
+    public List<GameObject> tracerList = new List<GameObject>();
     public float velocity =  1000;
     public float angle = 315;
     public float pastYFactor = 1.5f; // the amount of x you go past your initial Y - ie line goes on further 
@@ -56,8 +56,25 @@ public class LaunchArcRenderer : MonoBehaviour
     {
         // how am i going to do this? attempt to just send a ball every frame, high power low gravity?
         // every frame, create a 'fake' ball, launch it? feels like it's going to suck but let's have a go and see
-        Instantiate(tracer, this.transform);
+        tracerList.Add(Instantiate(tracer, this.transform));
+    }
 
+    private void Update()
+    {
+        var index = 0;
+
+        var array = new Vector3[tracerList.Count];
+
+
+        foreach (GameObject tracer in tracerList)
+        { 
+            array[index] = tracer.transform.position;
+            index++;
+        }
+
+        lr.material.color = Color.red;
+
+        lr.SetPositions(array);
     }
 
     // if angle is negative, i don't want an arc as it's just misleading in all cases at the moment

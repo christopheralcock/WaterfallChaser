@@ -7,10 +7,13 @@ public class Tracer : MonoBehaviour
     // Start is called before the first frame update
 
 
-    public string lol = "lol";
+
+    public int force = 1600;
+    public int idNumber;
+
     void Start()
     {
-        GetComponent<Rigidbody2D>().AddForce(CalculateDirection() * 800);
+        GetComponent<Rigidbody2D>().AddForce(CalculateDirection() * force);
         Debug.Log("added force to tracer");
 
     }
